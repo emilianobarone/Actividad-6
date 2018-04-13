@@ -1,0 +1,99 @@
+---
+title: "Actividad 6"
+author: "Natalia da Silva"
+date: "1/4/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Ejercicio 1
+
+1. Crear una  nuevo repositorio en GitHub llamado Actividad 6.
+
+2. Crear un proyecto de RStudio y conectarlo con su nuevo repositorio en GitHub
+
+3. Abrir un archivo de Rmarkdown que compile a pdf con la solución de la Actividad 6, puede usar como base el .Rmd que está disponible en EVA. 
+
+4. Realizar el primer `commit` y `push` con la Actividad 6 en su nuevo repositorio de GitHub (sólo el .Rmd).
+
+
+# Ejercicio 2
+Cargar la librería `tidyverse` y con los datos `mpg` usar las funciones que vimos de `dplyr` para  transformar los datos de la siguiente forma. 
+
+1. Seleccionar el conjunto de autos del 2008 que tienen `hwy` mayor a 31. ¿Cuantos autos son?
+
+2. Seleccionar el conjutno de autos que tienen `cty` igual a 9 ó hwy es mayor a 90. ¿Cuantos autos son? 
+
+3. Selecciona la variable `displ` y `hwy`
+
+4. Seleccioná desde la variable `trans` hasta la variable `hwy`
+
+5. Crear una nueva variable que transforme  `hwy` (millas por galón) en litros/100 km 
+Primero tenés que saber la conversión de galones a litros y de millas a kilómetros
+
+`1 gallón = 3.78541 litros`
+
+`1 milla = 1.60934 km`
+
+\newpage
+
+\centering Estudiante: Emiliano Barone
+
+\raggedright
+
+#Ejercicio 2
+
+##Parte 1
+
+```{r, results=T, warning=F, message=F}
+require(ggplot2)
+require(dplyr)
+filter(mpg, year==2008, hwy>31)
+```
+
+Son 6 autos los que cumplen esas condiciones
+
+##Parte 2
+
+```{r}
+filter(mpg, cty==9 | hwy>90)
+```
+ 
+Son 5 autos los que cumplen esas condiciones
+
+\newpage
+
+##Parte 3
+
+```{r}
+select(mpg, displ, hwy)
+```
+
+##Parte 4
+
+```{r}
+select(mpg, trans:hwy)
+```
+
+\newpage
+
+##Parte 5
+
+
+```{r}
+mpg= mutate(mpg, hwy_n = ((1/hwy) * (3.785)*(62.150)))
+select(mpg, hwy, hwy_n)
+```
+
+
+
+
+
+
+
+
+
