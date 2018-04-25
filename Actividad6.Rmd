@@ -97,21 +97,91 @@ select(mpg, hwy, hwy_n)
 
 ```{r}
 require(productplots)
-B=happy %>%
+happy %>%
   group_by(sex, age, happy)%>%
   summarise(happy_n=n())%>%
   mutate(happy_percent=happy_n/sum(happy_n))
 ```
 
+\newpage
+
+
 ##Parte 2
 
 ```{r}
-ggplot(filter(B, !is.na(age), !is.na(happy_percent), !is.na(happy)), aes(x=age, y=happy_percent, colour=happy))+
-  geom_point()
+happy%>%
+  filter(!is.na(happy)) %>% 
+  group_by(happy, year) %>% 
+  summarise(happy_n= n()) %>% 
+  mutate(happy_percent = happy_n /  sum(happy_n) * 100) %>%
+  ggplot(aes(x = year, y = happy_percent, colour = happy)) + 
+  geom_point()+
+  labs(x="Año", y="Porcentaje")
 ```
 
 
+\newpage
 
+##Parte 3
+
+```{r}
+happy%>%
+  filter(!is.na(happy), sex=="female")%>%
+  ggplot()+ 
+  geom_bar(aes(x = as.character(year), fill = happy), position = "fill")+
+  coord_flip()+
+  ggtitle("Sexo Femenino")+
+  labs(x="Año", y="Porcentaje")
+
+happy%>%
+  filter(!is.na(happy), sex=="male")%>%
+  ggplot()+ 
+  geom_bar(aes(x = as.character(year), fill = happy), position = "fill")+
+  ggtitle("Sexo Masculino")+
+  coord_flip()+
+  labs(x="Año", y="Porcentaje")
+
+```
+
+\newpage
+
+##Parte 4
+
+```{r}
+happy%>%
+  filter(!is.na(happy), !is.na(age))%>%
+  ggplot(aes(x = age, colour=happy))+ 
+  geom_freqpoly()+
+  facet_wrap(~sex)
+```
+
+\newpage
+
+##Parte 5
+
+```{r}
+levels(happy$marital)= c("Casado", "Nunca casado", "Divorciado", "viudo", "Separado")
+
+happy%>%
+  filter(!is.na(happy), !is.na(marital))%>%
+  ggplot(aes(x = marital, fill=happy))+ 
+  geom_bar(position = "fill")+
+  coord_flip()+
+  labs(x="Estado Civil", y="Cantidad de observaciones")
+
+levels(happy$finrela)=c("Muy debajo del promedio", "Debajo del promedio", "Promedio", "Encima del promedio", "Muy por encima del promedio")
+
+happy%>%
+  filter(!is.na(happy), !is.na(finrela))%>%
+  ggplot(aes(x = finrela, fill=happy))+ 
+  geom_bar(position = "fill")+
+  coord_flip()+
+  labs(x="Estado financiero", y="Cantidad de observaciones")
+```
+
+\newpage
+
+##Parte 6
 
 
 
