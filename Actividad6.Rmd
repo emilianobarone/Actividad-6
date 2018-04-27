@@ -129,8 +129,8 @@ happy%>%
   filter(!is.na(happy), sex=="female")%>%
   ggplot()+ 
   geom_bar(aes(x = as.character(year), fill = happy), position = "fill")+
-  coord_flip()+
   ggtitle("Sexo Femenino")+
+  theme(axis.text.x = element_text(angle=90))+
   labs(x="Año", y="Porcentaje")
 
 happy%>%
@@ -138,7 +138,7 @@ happy%>%
   ggplot()+ 
   geom_bar(aes(x = as.character(year), fill = happy), position = "fill")+
   ggtitle("Sexo Masculino")+
-  coord_flip()+
+  theme(axis.text.x = element_text(angle=90))+
   labs(x="Año", y="Porcentaje")
 
 ```
@@ -152,7 +152,8 @@ happy%>%
   filter(!is.na(happy), !is.na(age))%>%
   ggplot(aes(x = age, colour=happy))+ 
   geom_freqpoly()+
-  facet_wrap(~sex)
+  facet_wrap(~sex)+
+  labs(x="Edad", y= "Cantidad de observaciones")
 ```
 
 \newpage
@@ -166,7 +167,6 @@ happy%>%
   filter(!is.na(happy), !is.na(marital))%>%
   ggplot(aes(x = marital, fill=happy))+ 
   geom_bar(position = "fill")+
-  coord_flip()+
   labs(x="Estado Civil", y="Cantidad de observaciones")
 
 levels(happy$finrela)=c("Muy debajo del promedio", "Debajo del promedio", "Promedio", "Encima del promedio", "Muy por encima del promedio")
@@ -175,13 +175,38 @@ happy%>%
   filter(!is.na(happy), !is.na(finrela))%>%
   ggplot(aes(x = finrela, fill=happy))+ 
   geom_bar(position = "fill")+
-  coord_flip()+
+  theme(axis.text.x = element_text(angle=90))+
   labs(x="Estado financiero", y="Cantidad de observaciones")
 ```
 
 \newpage
 
 ##Parte 6
+
+```{r}
+happy %>% na.omit() %>%
+  group_by( happy, degree) %>%
+  summarise(n = n()) %>%
+  ggplot(aes(x = happy, y = degree, fill=n)) +
+  geom_tile()+
+  labs(x="Nivel de felicidad", y="Nivel de educacion", fill="Cantidad de observaciones")
+
+```
+
+\newpage
+
+##Parte 7
+
+```{r}
+happy %>% na.omit() %>%
+  group_by( happy, health) %>%
+  summarise(n = n()) %>%
+  ggplot(mapping = aes(x = happy, y = health, size=n)) +
+  geom_count()+
+  labs(x="Nivel de felicidad", y="Nivel de salud", size="Cantidad de observaciones")
+
+```
+
 
 
 
