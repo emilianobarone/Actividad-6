@@ -57,6 +57,11 @@ filter(mpg, year==2008, hwy>31)
 
 Son 6 autos los que cumplen esas condiciones
 
+
+\fbox{\begin{minipage}{48em}
+Bien, si fueran m\'as podr\'ias usar `summarise` para contar la cantidad
+\end{minipage}}
+
 ##Parte 2
 
 ```{r}
@@ -64,6 +69,10 @@ filter(mpg, cty==9 | hwy>90)
 ```
  
 Son 5 autos los que cumplen esas condiciones
+
+\fbox{\begin{minipage}{48em}
+Bien
+\end{minipage}}
 
 \newpage
 
@@ -73,11 +82,20 @@ Son 5 autos los que cumplen esas condiciones
 select(mpg, displ, hwy)
 ```
 
+\fbox{\begin{minipage}{48em}
+Bien
+\end{minipage}}
+
+
 ##Parte 4
 
 ```{r}
 select(mpg, trans:hwy)
 ```
+
+\fbox{\begin{minipage}{48em}
+Bien!
+\end{minipage}}
 
 \newpage
 
@@ -88,6 +106,11 @@ select(mpg, trans:hwy)
 mpg= mutate(mpg, hwy_n = ((1/hwy) * (3.785)*(62.150)))
 select(mpg, hwy, hwy_n)
 ```
+
+
+\fbox{\begin{minipage}{48em}
+Bien!
+\end{minipage}}
 
 \newpage
 
@@ -103,6 +126,10 @@ happy %>%
   mutate(happy_percent=happy_n/sum(happy_n))
 ```
 
+
+\fbox{\begin{minipage}{48em}
+Cuando puse a lo largo de todos los a\~nos esperaba que en el agrupamieto usaran year en vez de edad. A su vez hay que tener cuidado con `group\_by` ya que hay tener cuidado donde suma 100\%. Ver soluci\'on.
+\end{minipage}}
 \newpage
 
 
@@ -119,6 +146,12 @@ happy%>%
   labs(x="Año", y="Porcentaje")
 ```
 
+
+\fbox{\begin{minipage}{48em}
+Esperaba el mismo agrupamiento que el anterior tendr\'ia que haber 6 puntos en cada an\~no.
+Qu\'e suma 100\% en tu visualizaci\'on? hay que tener cuidado con el agrupamiento , si corr\'es hasta summarise vas a ver que la \'ultima variable con la que agrupaste no la toma en cuenta y define Groups solo con happy.
+Aunque no lo ped\'i en agregar\'ia un comentario interesante de la figura, el comentario te ayudar\'ia a ver si tiene o no sentido lo que ves y lo que est\'as dibujando.
+\end{minipage}}
 
 \newpage
 
@@ -142,6 +175,10 @@ happy%>%
   labs(x="Año", y="Porcentaje")
 
 ```
+\fbox{\begin{minipage}{48em}
+En este caso usando `facet\_wrap` facilitar\'ia la comparaci\'on porque ver\'iamos los dos en el mismo display gr\'afico.
+Se puede hacer sin incluir a\~no.
+\end{minipage}}
 
 \newpage
 
@@ -209,6 +246,12 @@ happy %>% na.omit() %>%
 
 
 
+
+\fbox{\begin{minipage}{48em}
+En el ejercicio 3 no alcanza con proponer una visualizaci\'on si no interpret\'as y respond\'es las preguntas planteadas.
+Tu c\'odigo y trabajo en general est\'a ordenado y prolijo pero le faltan comentarios. 
+Ver soluci\'on.  Puntos 8/10
+\end{minipage}}
 
 
 
